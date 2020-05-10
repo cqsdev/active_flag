@@ -4,8 +4,8 @@ module ActiveFlag
 
     def initialize(column, keys, klass)
       @column = column
-      @keys = keys.freeze
-      @maps = Hash[keys.map.with_index{ |key, i| [key, 2**i] }].freeze
+      @maps = keys.each_with_index.inject({}) { |hash, (key, i)| hash[key] = 2**i if key; hash }.freeze
+      @keys = keys.compact.freeze
       @klass = klass
     end
 

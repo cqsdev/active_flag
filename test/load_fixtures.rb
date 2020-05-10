@@ -12,7 +12,7 @@ end
 class Profile < ActiveRecord::Base
   flag :languages, [:english, :spanish, :chinese, :french, :japanese]
   flag :others, [:thing]
-  flag :figures, [:square, :circle]
+  flag :figures, [:square, false, :circle, nil, :triangle]
 end
 
 class SubProfile < Profile

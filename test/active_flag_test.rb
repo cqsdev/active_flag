@@ -120,4 +120,10 @@ class ActiveFlagTest < Minitest::Test
     assert_equal Profile.where_languages(:english, :japanese).count, 3
     assert_equal Profile.where_languages(:english, :japanese, op: :and).count, 1
   end
+
+  def test_nil_values
+    assert_equal Profile.figures.keys, [:square, :circle, :triangle]
+    @profile.figures = [:square, :circle, :triangle]
+    assert_equal @profile.figures.raw, 21
+  end
 end
