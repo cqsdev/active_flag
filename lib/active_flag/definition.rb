@@ -2,10 +2,13 @@ module ActiveFlag
   class Definition
     attr_reader :keys, :maps, :column
 
-    def initialize(column, keys, klass)
+    def initialize(column, values, klass)
       @column = column
-      @maps = keys.each_with_index.inject({}) { |hash, (key, i)| hash[key] = 2**i if key; hash }.freeze
-      @keys = keys.compact.freeze
+      if values.is_a?(Array)
+        values = values.each_with_index
+      end
+      @maps = values.inject({}) { |hash, (key, i)| hash[key] = 2**i if key; hash }.freeze
+      @keys = @maps.keys.freeze
       @klass = klass
     end
 

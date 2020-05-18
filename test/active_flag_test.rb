@@ -126,4 +126,17 @@ class ActiveFlagTest < Minitest::Test
     @profile.figures = [:square, :circle, :triangle]
     assert_equal 21, @profile.figures.raw
   end
+
+  def test_custom_map_order
+    assert_equal [:one, :four, :three], Profile.customs.keys
+  end
+
+  def test_custom_map_values
+    @profile.customs.set(:one)
+    assert_equal 2, @profile.customs.raw
+    @profile.customs.set(:three)
+    assert_equal 10, @profile.customs.raw
+    @profile.customs.set(:four)
+    assert_equal 26, @profile.customs.raw
+  end
 end
