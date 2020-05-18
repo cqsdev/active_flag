@@ -46,13 +46,13 @@ class ActiveFlagTest < Minitest::Test
   def test_default_empty_array
     @profile.languages = []
 
-    assert_equal @profile.languages.raw, 0
-    assert @profile.languages, 0
+    assert_equal 0, @profile.languages.raw
+    assert 0, @profile.languages
   end
 
   def test_default_nil
-    assert_equal @profile.figures.raw, 0
-    assert @profile.figures, 0
+    assert_equal 0, @profile.figures.raw
+    assert 0, @profile.figures
   end
 
   def test_direct_string_assign
@@ -68,17 +68,17 @@ class ActiveFlagTest < Minitest::Test
   end
 
   def test_raw
-    assert_equal @profile.languages.raw, 1
+    assert_equal 1, @profile.languages.raw
 
     @profile.languages.set(:spanish)
-    assert_equal @profile.languages.raw, 3
+    assert_equal 3, @profile.languages.raw
 
     @profile.languages.set(:chinese)
-    assert_equal @profile.languages.raw, 7
+    assert_equal 7, @profile.languages.raw
   end
 
   def test_to_s
-    assert_equal @profile.languages.to_s, '[:english]'
+    assert_equal '[:english]', @profile.languages.to_s
   end
 
   def test_locale
@@ -110,20 +110,20 @@ class ActiveFlagTest < Minitest::Test
   end
 
   def test_same_column_in_other_class
-    assert_equal Profile.others.keys, [:thing]
-    assert_equal Other.others.keys, [:another]
+    assert_equal [:thing], Profile.others.keys
+    assert_equal [:another], Other.others.keys
   end
 
   def test_scope
-    assert_equal Profile.where_languages(:english).count, 2
-    assert_equal Profile.where_languages(:japanese).count, 2
-    assert_equal Profile.where_languages(:english, :japanese).count, 3
-    assert_equal Profile.where_languages(:english, :japanese, op: :and).count, 1
+    assert_equal 2, Profile.where_languages(:english).count
+    assert_equal 2, Profile.where_languages(:japanese).count
+    assert_equal 3, Profile.where_languages(:english, :japanese).count
+    assert_equal 1, Profile.where_languages(:english, :japanese, op: :and).count
   end
 
   def test_nil_values
-    assert_equal Profile.figures.keys, [:square, :circle, :triangle]
+    assert_equal [:square, :circle, :triangle], Profile.figures.keys
     @profile.figures = [:square, :circle, :triangle]
-    assert_equal @profile.figures.raw, 21
+    assert_equal 21, @profile.figures.raw
   end
 end
